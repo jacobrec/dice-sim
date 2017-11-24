@@ -63,11 +63,11 @@ List_t *tokenize(char *input) {
                 break;
 
             case 'd': {
-                // if ((*((Token_t *)peek(toks))).type == NUMBER || (*((Token_t *)peek(toks))).type == BRACK_RIGHT) {
-                //     token->type = OP_MULIPLY_VECTOR;
-                //     token->data = 0b1110;
-                //     push(toks, token);
-                // }
+                if ((*((Token_t *)peek(toks))).type != NUMBER || (*((Token_t *)peek(toks))).type != BRACK_RIGHT) {
+                    token->type = NUMBER;
+                    token->data = 0b0001;
+                    push(toks, token);
+                }
                 token->type = DIE;
                 token->data = 0;//getNextNumber(&index, input);
                 push(toks, token);
@@ -188,7 +188,7 @@ void printTokennnl(Token_t tok) {
             break;
 
         case DIE:
-            printf("%s: d%ld", "DIE", tok.data);
+            printf("%s", "DIE");
             break;
 
         case NUMBER:

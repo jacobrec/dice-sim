@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
+#include <stdlib.h>
 
 #include "freq.h"
 #include "list.h"
@@ -29,6 +31,8 @@ int roll(char *roll) {
         printf("Rolling: %s\n", roll);
         printFreq(evaluate(e));
     }
+    //free(e);
+    free(toks);
 }
 
 int clear(char inp[BUFFER_SIZE]) {
@@ -39,7 +43,7 @@ int clear(char inp[BUFFER_SIZE]) {
 
 int hasArg(char *str, int argc, char const *argv[]) {
     for (int i = 1; i < argc; i++) {
-        if (strcmp(argv[1], str) == 0) {
+        if (strcmp(argv[i], str) == 0) {
             return(1);
         }
     }
@@ -48,6 +52,7 @@ int hasArg(char *str, int argc, char const *argv[]) {
 }
 
 int main(int argc, char const *argv[]) {
+    srand(time(NULL));
     if (hasArg("-p", argc, argv)) {
         showTree = 1;
     }

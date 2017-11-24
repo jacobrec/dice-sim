@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 Frequency *createFrequency(int initalMax) {
     Frequency *f = malloc(sizeof(Frequency));
@@ -39,15 +40,15 @@ Frequency *createStandardDice(int size) {
     return(f);
 }
 
-Frequency *createMultiDice(int dieNum, int dieSize){
-    Frequency *die = createStandardDice(dieSize);
+Frequency *createMultiDice(int dieNum, int dieSize) {
+    Frequency *die   = createStandardDice(dieSize);
     Frequency *scale = createScalar(dieNum);
 
     Frequency *ans = increaseDieNumber(scale, die);
-    
+
     free(scale);
     free(die);
-    return ans;
+    return(ans);
 }
 
 void expandTo(Frequency *f, int newMax) {
@@ -166,13 +167,20 @@ Frequency *divideFreq(Frequency *f1, Frequency *f2) {
 }
 
 int rollFreq(Frequency *f) {
+    int r = rand() % getTotal(f);
+    int i;
+    for(i = 0; r > 0; i++){// increment i while r is greater then zero
+        r -= getAmount(f, i);
+    }
+    return i;
 }
 
 void printFreq(Frequency *f) {
     float cummulitive = 0;
+
     for (int i = 0; i < f->totalThings; i++) {
         if (getAmount(f, i) > 0) {
-            printf("Number: %d,\tPercent: %f%%\tCummulitive: %f%%\n", i, getPercent(f, i), 100-cummulitive);
+            printf("Number: %d,\tPercent: %f%%\tCummulitive: %f%%\n", i, getPercent(f, i), 100 - cummulitive);
             cummulitive += getPercent(f, i);
         }
     }
