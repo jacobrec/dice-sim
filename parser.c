@@ -22,6 +22,7 @@
  * OP_MULIPLY_VECTOR
  *
  * DIE
+ *
  * NUMBER
  * BRACKETS
  *
@@ -48,12 +49,12 @@ Expression_t binaryExpressonL(Token_t tok) {
     ex.left  = malloc(sizeof(Expression_t));
     ex.right = malloc(sizeof(Expression_t));
     memcpy(ex.left, &root, sizeof(Expression_t));
-    return ex;
+    return(ex);
 }
+
 void binaryExpressonR(Expression_t ex) {
     memcpy(ex.right, &root, sizeof(Expression_t));
     memcpy(&root, &ex, sizeof(Expression_t));
-
 }
 
 void lvl_add() {
@@ -80,7 +81,6 @@ void lvl_roll() {
     lvl_mulVec();
 
     while (currentSymbol.type == OP_ROLL) { // For now, hope theres no rolls
-
     }
 }
 
@@ -95,17 +95,19 @@ void lvl_mulVec() {
 }
 
 void lvl_die() {
+    lvl_num();
+
+    while (currentSymbol.type == DIE) {
+        Expression_t ex = binaryExpressonL(currentSymbol);
+        lvl_num();
+        binaryExpressonR(ex);
+    }
+}
+
+void lvl_num() {
     nextSymbol();
 
     switch (currentSymbol.type) {
-
-        case DIE:
-            root.left  = NULL;
-            root.right = NULL;
-            root.op    = currentSymbol;
-            nextSymbol();
-            break;
-
         case NUMBER:
             root.left  = NULL;
             root.right = NULL;
@@ -197,7 +199,13 @@ Frequency *evaluate(Expression_t *expr) {
         }
 
         case DIE: {
-            return(createStandardDice(expr->op.data));
+            Frequency *l = evaluate(expr->left);
+            Frequency *r = evaluate(expr->right);
+
+            free(l);
+            free(r);
+
+            return(createMultiDice(getScalarValue(l), getScalarValue(r)));
         }
 
         case NUMBER: {

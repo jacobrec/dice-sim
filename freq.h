@@ -17,7 +17,7 @@ void destroyFrequency(Frequency *f);
 
 Frequency *createScalar(int num);
 Frequency *createStandardDice(int size);
-
+Frequency *createMultiDice(int dieNum, int dieSize);
 
 int isScalar(Frequency *f);
 int getScalarValue(Frequency *scalar);

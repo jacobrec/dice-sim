@@ -63,13 +63,13 @@ List_t *tokenize(char *input) {
                 break;
 
             case 'd': {
-                if ((*((Token_t *)peek(toks))).type == NUMBER || (*((Token_t *)peek(toks))).type == BRACK_RIGHT) {
-                    token->type = OP_MULIPLY_VECTOR;
-                    token->data = 0b1110;
-                    push(toks, token);
-                }
+                // if ((*((Token_t *)peek(toks))).type == NUMBER || (*((Token_t *)peek(toks))).type == BRACK_RIGHT) {
+                //     token->type = OP_MULIPLY_VECTOR;
+                //     token->data = 0b1110;
+                //     push(toks, token);
+                // }
                 token->type = DIE;
-                token->data = getNextNumber(&index, input);
+                token->data = 0;//getNextNumber(&index, input);
                 push(toks, token);
                 break;
             }

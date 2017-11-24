@@ -22,6 +22,7 @@ void lvl_div();
 void lvl_roll();
 void lvl_mulVec();
 void lvl_die();
+void lvl_num();
 
 
 void nextSymbol();

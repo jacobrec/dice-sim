@@ -39,6 +39,17 @@ Frequency *createStandardDice(int size) {
     return(f);
 }
 
+Frequency *createMultiDice(int dieNum, int dieSize){
+    Frequency *die = createStandardDice(dieSize);
+    Frequency *scale = createScalar(dieNum);
+
+    Frequency *ans = increaseDieNumber(scale, die);
+    
+    free(scale);
+    free(die);
+    return ans;
+}
+
 void expandTo(Frequency *f, int newMax) {
     if (newMax > f->totalThings) {
         f->amounts = realloc(f->amounts, sizeof(int) * newMax);
