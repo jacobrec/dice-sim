@@ -161,7 +161,7 @@ void printFreq(Frequency *f) {
     float cummulitive = 0;
     for (int i = 0; i < f->totalThings; i++) {
         if (getAmount(f, i) > 0) {
-            printf("Number: %d, Frequency: %d, Percent: %f%%, Cummulitive: %f%%\n", i, getAmount(f, i), getPercent(f, i), 100-cummulitive);
+            printf("Number: %d,\tPercent: %f%%\tCummulitive: %f%%\n", i, getAmount(f, i), getPercent(f, i), 100-cummulitive);
             cummulitive += getPercent(f, i);
         }
     }

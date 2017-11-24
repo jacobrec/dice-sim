@@ -10,10 +10,10 @@
 int roll(char *roll) {
     List_t *toks = tokenize(roll);
 
-    printTokens(toks);
+    //printTokens(toks);
     Expression_t *e = parse(toks);
 
-    printTree(e);
+    //printTree(e);
 
     printf("Rolling: %s\n", roll);
     printFreq(evaluate(e));

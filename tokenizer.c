@@ -197,7 +197,6 @@ void printTokennnl(Token_t tok) {
     }
 }
 
-
 void printToken(Token_t tok) {
     printTokennnl(tok);
     printf("\n");
