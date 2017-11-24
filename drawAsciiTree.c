@@ -142,5 +142,13 @@ void printTree(Expression_t *e) {
     printTreePretty(e, grid, 0, 40);
 
 
+    int indexOfLastPrintableCharactor = 0;
+    for(int i = 0; i < grid_width * max_grid_height; i++){
+        if(grid[i] != ' ' && grid[i] != '\n'){
+            indexOfLastPrintableCharactor = i;
+        }
+    }
+    grid[indexOfLastPrintableCharactor+1] = '\0';
+
     printf("%s", grid);
 }
