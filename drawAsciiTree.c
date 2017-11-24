@@ -33,7 +33,7 @@ int grid_width      = 80;
 int max_grid_height = 80;
 int getBottomRungSize(Expression_t *e) {
     if (e->left == NULL || e->right == NULL) {
-        return(3);
+        return(1);
     }
     else{
         return(getBottomRungSize(e->left) + getBottomRungSize(e->right));
@@ -150,5 +150,5 @@ void printTree(Expression_t *e) {
     }
     grid[indexOfLastPrintableCharactor+1] = '\0';
 
-    printf("%s", grid);
+    printf("%s\n", grid);
 }
